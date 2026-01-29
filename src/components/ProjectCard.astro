@@ -1,0 +1,46 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  url: string;
+}
+
+const { title, description, tags, url } = Astro.props;
+---
+
+<article class="project-card group">
+  <a href={url} class="block h-full">
+    <div class="border border-cyan-500/30 bg-black/30 p-6 rounded-lg h-full hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 hover:-translate-y-1">
+      <!-- Title -->
+      <h3 class="text-xl font-bold text-cyan-400 mb-3 group-hover:text-cyan-300 transition-colors">
+        <span class="text-green-400">&gt;</span> {title}
+      </h3>
+
+      <!-- Description -->
+      <p class="text-green-400/80 text-sm mb-4 leading-relaxed">
+        {description}
+      </p>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2 mt-auto">
+        {tags.map((tag) => (
+          <span class="px-3 py-1 text-xs border border-green-500/50 text-green-400 rounded bg-green-500/10 hover:bg-green-500/20 transition-colors">
+            #{tag}
+          </span>
+        ))}
+      </div>
+
+      <!-- Arrow Indicator -->
+      <div class="mt-4 text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity text-sm">
+        → View Details
+      </div>
+    </div>
+  </a>
+</article>
+
+<style>
+  .project-card {
+    transition: all 0.3s ease;
+  }
+</style>

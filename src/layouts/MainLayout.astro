@@ -1,0 +1,88 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+  title?: string;
+}
+
+const { title = 'Portfolio | Cybersecurity Student' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+  <body class="bg-black text-green-400 font-mono min-h-screen flex flex-col">
+    <!-- Navigation Bar -->
+    <header class="border-b border-cyan-500/30 bg-black/50 backdrop-blur-sm sticky top-0 z-50">
+      <nav class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <a href="/" class="text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+            <span class="text-green-400">&gt;</span> portfolio.sh
+          </a>
+          <ul class="flex gap-6">
+            <li>
+              <a 
+                href="/" 
+                class="hover:text-cyan-400 transition-colors border-b-2 border-transparent hover:border-cyan-400"
+              >
+                [Home]
+              </a>
+            </li>
+            <li>
+              <a 
+                href="/projects" 
+                class="hover:text-cyan-400 transition-colors border-b-2 border-transparent hover:border-cyan-400"
+              >
+                [Projects]
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content with Fade Transition -->
+    <main 
+      class="flex-grow container mx-auto px-4 py-8"
+      transition:animate="fade"
+    >
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-cyan-500/30 bg-black/50 backdrop-blur-sm mt-auto">
+      <div class="container mx-auto px-4 py-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-sm text-green-400/70">
+            <span class="text-cyan-400">&gt;</span> Built with Astro & Tailwind CSS
+          </p>
+          <p class="text-sm text-green-400/70">
+            © {new Date().getFullYear()} | Cybersecurity Student @ HvA Amsterdam
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  ::selection {
+    background-color: rgba(6, 182, 212, 0.3);
+    color: #22d3ee;
+  }
+</style>

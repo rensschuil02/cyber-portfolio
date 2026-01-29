@@ -1,0 +1,87 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Home | Cybersecurity Portfolio">
+  <!-- Hero Section -->
+  <section class="min-h-[60vh] flex items-center justify-center">
+    <div class="text-center space-y-6">
+      <!-- Terminal-style prompt -->
+      <div class="text-left inline-block">
+        <p class="text-green-400/70 text-sm mb-2">$ whoami</p>
+        <h1 class="text-4xl md:text-6xl font-bold">
+          <span class="text-cyan-400">Your Name</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-green-400 mt-4">
+          Cybersecurity Student @ <span class="text-cyan-400">HvA Amsterdam</span>
+        </p>
+      </div>
+
+      <!-- Blinking Cursor Effect -->
+      <div class="text-green-400/70 animate-pulse text-2xl">_</div>
+
+      <!-- Quick Links -->
+      <div class="flex gap-4 justify-center pt-6">
+        <a 
+          href="/projects" 
+          class="px-6 py-3 border border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 hover:shadow-lg hover:shadow-cyan-500/20 transition-all rounded"
+        >
+          [View Projects]
+        </a>
+        <a 
+          href="mailto:your.email@hva.nl" 
+          class="px-6 py-3 border border-green-500 text-green-400 hover:bg-green-500/10 hover:shadow-lg hover:shadow-green-500/20 transition-all rounded"
+        >
+          [Contact Me]
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Me Section -->
+  <section class="max-w-4xl mx-auto py-12">
+    <div class="border border-cyan-500/30 bg-black/30 p-8 rounded-lg">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-6">
+        <span class="text-green-400">&gt;</span> cat about.txt
+      </h2>
+      
+      <div class="space-y-4 text-green-400/90 leading-relaxed">
+        <p class="border-l-2 border-cyan-500/50 pl-4">
+          I am a passionate Cybersecurity student at HvA Amsterdam, specializing in 
+          <span class="text-cyan-400 font-semibold">Blue Teaming</span> and 
+          <span class="text-cyan-400 font-semibold">Network Security</span>.
+        </p>
+        
+        <p class="border-l-2 border-cyan-500/50 pl-4">
+          My focus is on defensive security operations, threat detection, incident response, 
+          and building resilient network infrastructures. I enjoy analyzing security incidents, 
+          hunting for threats, and implementing robust security controls.
+        </p>
+
+        <p class="border-l-2 border-cyan-500/50 pl-4">
+          Through hands-on projects and lab environments, I've developed skills in:
+        </p>
+
+        <ul class="list-none space-y-2 pl-4">
+          <li class="text-green-400"><span class="text-cyan-400">→</span> Network Traffic Analysis (Wireshark, tcpdump)</li>
+          <li class="text-green-400"><span class="text-cyan-400">→</span> SIEM Configuration & Log Analysis</li>
+          <li class="text-green-400"><span class="text-cyan-400">→</span> Malware Analysis & Reverse Engineering</li>
+          <li class="text-green-400"><span class="text-cyan-400">→</span> Penetration Testing & Vulnerability Assessment</li>
+          <li class="text-green-400"><span class="text-cyan-400">→</span> Security Hardening & Compliance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terminal Command Decoration -->
+  <div class="text-center py-8 text-green-400/50 text-sm">
+    <p>$ ls -la /home/projects</p>
+  </div>
+</MainLayout>
+
+<style>
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+</style>

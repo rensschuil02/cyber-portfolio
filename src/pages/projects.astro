@@ -1,0 +1,84 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+// Project Data
+const projects = [
+  {
+    title: 'Network Audit',
+    description: 'Comprehensive network security audit conducted at HvA infrastructure. Identified vulnerabilities, analyzed traffic patterns, and provided remediation strategies.',
+    tags: ['Network Security', 'Wireshark', 'Nmap', 'Security Audit'],
+    url: '/writeups/network-audit'
+  },
+  {
+    title: 'Malware Analysis',
+    description: 'Deep dive into ransomware behavior using isolated sandbox environment. Reverse engineered malicious binaries and documented IOCs for threat intelligence.',
+    tags: ['Malware Analysis', 'Reverse Engineering', 'Threat Intel', 'IDA Pro'],
+    url: '#'
+  },
+  {
+    title: 'SIEM Implementation',
+    description: 'Deployed and configured Splunk SIEM for centralized log management. Created custom detection rules and automated incident response workflows.',
+    tags: ['SIEM', 'Splunk', 'Log Analysis', 'SOC'],
+    url: '#'
+  },
+  {
+    title: 'Web Application Pentest',
+    description: 'Penetration testing of a vulnerable web application. Discovered and exploited OWASP Top 10 vulnerabilities including SQL injection and XSS.',
+    tags: ['Web Security', 'OWASP', 'Burp Suite', 'Pentesting'],
+    url: '#'
+  },
+  {
+    title: 'Incident Response Lab',
+    description: 'Simulated cyber incident response scenario involving data breach. Performed forensic analysis, contained threats, and documented findings.',
+    tags: ['Incident Response', 'Digital Forensics', 'DFIR', 'Blue Team'],
+    url: '#'
+  },
+  {
+    title: 'Secure Network Design',
+    description: 'Designed and implemented a secure enterprise network with proper segmentation, firewall rules, and IDS/IPS deployment.',
+    tags: ['Network Design', 'Firewall', 'IDS/IPS', 'Network Segmentation'],
+    url: '#'
+  }
+];
+---
+
+<MainLayout title="Projects | Cybersecurity Portfolio">
+  <!-- Page Header -->
+  <section class="mb-12">
+    <div class="text-left">
+      <p class="text-green-400/70 text-sm mb-2">$ cd /projects && ls -la</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">
+        <span class="text-green-400">&gt;</span> Projects
+      </h1>
+      <p class="text-green-400/80 text-lg max-w-3xl">
+        A collection of cybersecurity projects, labs, and write-ups focusing on 
+        Blue Team operations, network security, and threat analysis.
+      </p>
+    </div>
+  </section>
+
+  <!-- Project Count -->
+  <div class="mb-8">
+    <p class="text-green-400/70 text-sm">
+      <span class="text-cyan-400">→</span> Total Projects: <span class="text-cyan-400 font-bold">{projects.length}</span>
+    </p>
+  </div>
+
+  <!-- Project Grid -->
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {projects.map((project) => (
+      <ProjectCard
+        title={project.title}
+        description={project.description}
+        tags={project.tags}
+        url={project.url}
+      />
+    ))}
+  </section>
+
+  <!-- Terminal Footer -->
+  <div class="text-center py-12 text-green-400/50 text-sm">
+    <p>$ EOF</p>
+  </div>
+</MainLayout>
