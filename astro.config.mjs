@@ -6,5 +6,10 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: 'https://rensschuil02.github.io',
   base: '/cyber-portfolio',
-  integrations: [tailwind(), mdx()],
+  integrations: [tailwind({ applyBaseStyles: false }), mdx()],
+  markdown: {
+    shikiConfig: {
+      theme: 'github-dark',
+    },
+  },
 });
