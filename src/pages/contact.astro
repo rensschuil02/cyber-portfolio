@@ -1,0 +1,186 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="Contact | Cybersecurity Portfolio">
+  <!-- Hero Section -->
+  <section class="min-h-[40vh] flex items-center justify-center mb-12">
+    <div class="text-center space-y-6">
+      <div class="text-left inline-block">
+        <p class="text-green-400/70 text-sm mb-2">$ cat /etc/contact.conf</p>
+        <h1 class="text-4xl md:text-6xl font-bold">
+          <span class="text-cyan-400">Get In Touch</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-green-400 mt-4">
+          Let's <span class="text-cyan-400">Connect</span>
+        </p>
+      </div>
+
+      <!-- Blinking Cursor Effect -->
+      <div class="text-green-400/70 animate-pulse text-2xl">_</div>
+    </div>
+  </section>
+
+  <!-- Contact Info Section -->
+  <section class="max-w-4xl mx-auto mb-12">
+    <div class="border border-cyan-500/30 bg-black/30 p-8 rounded-lg">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-6">
+        <span class="text-green-400">&gt;</span> ./get_contact_info.sh
+      </h2>
+      
+      <div class="space-y-6 text-green-400/90 leading-relaxed">
+        <p class="border-l-2 border-cyan-500/50 pl-4">
+          I'm always interested in discussing cybersecurity projects, collaboration opportunities, 
+          or just connecting with fellow security enthusiasts. Feel free to reach out through any of the channels below!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Methods Grid -->
+  <section class="max-w-5xl mx-auto mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <!-- Email -->
+      <div class="border border-cyan-500/30 bg-black/30 p-6 rounded-lg hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 transition-all">
+        <div class="flex items-start gap-4">
+          <div class="text-3xl text-cyan-400">📧</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-cyan-400 mb-2">
+              <span class="text-green-400">&gt;</span> Email
+            </h3>
+            <p class="text-green-400/80 text-sm mb-3">
+              Best for formal inquiries and project discussions
+            </p>
+            <a 
+              href="mailto:your.email@hva.nl" 
+              class="text-cyan-400 hover:text-cyan-300 transition-colors break-all"
+            >
+              your.email@hva.nl
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- GitHub -->
+      <div class="border border-cyan-500/30 bg-black/30 p-6 rounded-lg hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 transition-all">
+        <div class="flex items-start gap-4">
+          <div class="text-3xl text-cyan-400">💻</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-cyan-400 mb-2">
+              <span class="text-green-400">&gt;</span> GitHub
+            </h3>
+            <p class="text-green-400/80 text-sm mb-3">
+              Check out my projects and contributions
+            </p>
+            <a 
+              href="https://github.com/rensschuil02" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-cyan-400 hover:text-cyan-300 transition-colors"
+            >
+              github.com/rensschuil02
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- LinkedIn -->
+      <div class="border border-cyan-500/30 bg-black/30 p-6 rounded-lg hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 transition-all">
+        <div class="flex items-start gap-4">
+          <div class="text-3xl text-cyan-400">🔗</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-cyan-400 mb-2">
+              <span class="text-green-400">&gt;</span> LinkedIn
+            </h3>
+            <p class="text-green-400/80 text-sm mb-3">
+              Professional networking and career opportunities
+            </p>
+            <a 
+              href="https://linkedin.com/in/yourprofile" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-cyan-400 hover:text-cyan-300 transition-colors"
+            >
+              linkedin.com/in/yourprofile
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discord/Community -->
+      <div class="border border-cyan-500/30 bg-black/30 p-6 rounded-lg hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 transition-all">
+        <div class="flex items-start gap-4">
+          <div class="text-3xl text-cyan-400">💬</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-cyan-400 mb-2">
+              <span class="text-green-400">&gt;</span> Discord
+            </h3>
+            <p class="text-green-400/80 text-sm mb-3">
+              Quick chats and community discussions
+            </p>
+            <p class="text-cyan-400">
+              YourUsername#0000
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Availability Status -->
+  <section class="max-w-4xl mx-auto mb-12">
+    <div class="border border-green-500/30 bg-black/30 p-6 rounded-lg">
+      <div class="flex items-center gap-4">
+        <div class="text-3xl">🟢</div>
+        <div>
+          <h3 class="text-xl font-bold text-green-400 mb-1">
+            <span class="text-cyan-400">&gt;</span> Status: Available
+          </h3>
+          <p class="text-green-400/80 text-sm">
+            Currently open to internship opportunities, freelance projects, and collaboration in cybersecurity research.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Response Time -->
+  <section class="max-w-4xl mx-auto mb-12">
+    <div class="border border-cyan-500/30 bg-black/30 p-8 rounded-lg">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-6">
+        <span class="text-green-400">&gt;</span> cat response_time.txt
+      </h2>
+      
+      <div class="space-y-4 text-green-400/90 leading-relaxed">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+          <div>
+            <p class="text-3xl font-bold text-cyan-400 mb-2">24h</p>
+            <p class="text-sm text-green-400/70">Email Response</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-cyan-400 mb-2">GMT+1</p>
+            <p class="text-sm text-green-400/70">Time Zone</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-cyan-400 mb-2">🇳🇱</p>
+            <p class="text-sm text-green-400/70">Based in Amsterdam</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terminal Footer -->
+  <div class="text-center py-8 text-green-400/50 text-sm">
+    <p>$ echo "Looking forward to hearing from you!"</p>
+  </div>
+</MainLayout>
+
+<style>
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+</style>
