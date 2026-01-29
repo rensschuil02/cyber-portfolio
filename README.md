@@ -1,71 +1,29 @@
-# Cybersecurity Portfolio
+# Cybersecurity Portfolio - rensschuil02
 
-A high-performance, secure portfolio website built with Astro and Tailwind CSS featuring a Terminal/Cyber aesthetic.
+## Overview
+This repository contains the source code for my professional portfolio. The project documents technical competencies acquired during the Associate Degree (AD) Cybersecurity program at the Hogeschool van Amsterdam (HvA). 
 
-## 🚀 Deployment
+The site serves as a central repository for:
+* Network security audit reports
+* Malware analysis documentation
+* Defensive security lab write-ups
+* Secure infrastructure design projects
 
-This site is configured for automatic deployment to GitHub Pages.
+## Technical Architecture
+The site is built with a focus on security, performance, and a minimal attack surface.
 
-### Setup Instructions
+* **Framework:** Astro (Static Site Generation)
+* **Design System:** Tailwind CSS (Terminal/CLI UI)
+* **Navigation:** Astro View Transitions API
+* **Deployment Pipeline:** GitHub Pages / Cloudflare
+* **Automation:** Custom Bash script (`deploy.sh`) for secure version control and deployment.
 
-1. **Create a new GitHub repository** named `rensschuil02.github.io` (replace with your username if different)
+## Project Categories
+* **Defensive Operations:** SIEM configuration (Splunk), log analysis, and incident response simulation.
+* **Security Assessments:** Infrastructure auditing using Nmap, Wireshark, and Metasploit.
+* **Web Security:** Identification and remediation of OWASP Top 10 vulnerabilities.
+* **Hardening:** Implementation of HSTS, CSP, and secure network segmentation.
 
-2. **Initialize and push your code:**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: Cybersecurity portfolio"
-   git branch -M main
-   git remote add origin https://github.com/rensschuil02/rensschuil02.github.io.git
-   git push -u origin main
-   ```
-
-3. **Enable GitHub Pages:**
-   - Go to your repository settings
-   - Navigate to **Pages** (in the left sidebar)
-   - Under **Source**, select **GitHub Actions**
-
-4. **Wait for deployment:**
-   - The GitHub Action will automatically run
-   - Your site will be live at: `https://rensschuil02.github.io`
-
-### Alternative: Deploy to a Project Repository
-
-If you want to deploy to a project repository (e.g., `portfolio-website-project`):
-
-1. In `astro.config.mjs`, uncomment and update:
-   ```js
-   base: '/portfolio-website-project',
-   ```
-
-2. Update the repository URL when pushing:
-   ```bash
-   git remote add origin https://github.com/rensschuil02/portfolio-website-project.git
-   ```
-
-3. Your site will be at: `https://rensschuil02.github.io/portfolio-website-project`
-
-## 🧞 Commands
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-
-## 🎨 Features
-
-- ⚡ Built with Astro for optimal performance
-- 🎯 View Transitions for smooth navigation
-- 🎨 Terminal/Cyber aesthetic with Tailwind CSS
-- 📱 Fully responsive design
-- 🔒 Security-focused content
-- 🚀 Optimized for GitHub Pages
-
-## 📝 Customization
-
-- Update your name in `/src/pages/index.astro`
-- Add your projects in `/src/pages/projects.astro`
-- Create writeups in `/src/pages/writeups/`
-- Modify colors in Tailwind classes (cyan/green theme)
+## Contact
+* **LinkedIn:** https://www.linkedin.com/in/rens-schuil-b45440184/
+* **GitHub:** https://github.com/rensschuil02
