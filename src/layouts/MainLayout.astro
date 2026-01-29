@@ -7,7 +7,9 @@ interface Props {
 }
 
 const { title = 'Portfolio | Cybersecurity Student' } = Astro.props;
-const baseUrl = import.meta.env.BASE_URL || '/';
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
+  ? import.meta.env.BASE_URL 
+  : import.meta.env.BASE_URL + '/';
 ---
 
 <!DOCTYPE html>
@@ -123,39 +125,59 @@ const baseUrl = import.meta.env.BASE_URL || '/';
     </footer>
 
     <!-- Mobile Menu Script -->
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const closeIcon = document.getElementById('close-icon');
+    <script is:inline>
+      // Run immediately without waiting for DOMContentLoaded
+      (function() {
+        function initMenu() {
+          const menuButton = document.getElementById('mobile-menu-button');
+          const mobileMenu = document.getElementById('mobile-menu');
+          const menuIcon = document.getElementById('menu-icon');
+          const closeIcon = document.getElementById('close-icon');
 
-        if (menuButton && mobileMenu && menuIcon && closeIcon) {
-          menuButton.addEventListener('click', () => {
-            const isHidden = mobileMenu.classList.contains('hidden');
+          if (menuButton && mobileMenu && menuIcon && closeIcon) {
+            // Remove any existing listeners
+            const newButton = menuButton.cloneNode(true);
+            menuButton.parentNode.replaceChild(newButton, menuButton);
             
-            if (isHidden) {
-              mobileMenu.classList.remove('hidden');
-              menuIcon.classList.add('hidden');
-              closeIcon.classList.remove('hidden');
-            } else {
-              mobileMenu.classList.add('hidden');
-              menuIcon.classList.remove('hidden');
-              closeIcon.classList.add('hidden');
-            }
-          });
-
-          // Close menu when clicking on a link
-          const menuLinks = mobileMenu.querySelectorAll('a');
-          menuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-              mobileMenu.classList.add('hidden');
-              menuIcon.classList.remove('hidden');
-              closeIcon.classList.add('hidden');
+            newButton.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              
+              const isHidden = mobileMenu.classList.contains('hidden');
+              
+              if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+              } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+              }
             });
-          });
+
+            // Close menu when clicking on a link
+            const menuLinks = mobileMenu.querySelectorAll('a');
+            menuLinks.forEach(function(link) {
+              link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+              });
+            });
+          }
         }
-      });
+
+        // Try to init immediately
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initMenu);
+        } else {
+          initMenu();
+        }
+
+        // Re-init after Astro page transitions
+        document.addEventListener('astro:after-swap', initMenu);
+      })();
     </script>
   </body>
 </html>
