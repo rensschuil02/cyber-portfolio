@@ -8,7 +8,7 @@ const projects = [
     title: 'Network Audit',
     description: 'Comprehensive network security audit conducted at HvA infrastructure. Identified vulnerabilities, analyzed traffic patterns, and provided remediation strategies.',
     tags: ['Network Security', 'Wireshark', 'Nmap', 'Security Audit'],
-    url: '/writeups/network-audit'
+    url: '/cyber-portfolio/writeups/network-audit'
   },
   {
     title: 'Malware Analysis',
@@ -44,41 +44,96 @@ const projects = [
 ---
 
 <MainLayout title="Projects | Cybersecurity Portfolio">
-  <!-- Page Header -->
-  <section class="mb-12">
-    <div class="text-left">
-      <p class="text-green-400/70 text-sm mb-2">$ cd /projects && ls -la</p>
-      <h1 class="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">
-        <span class="text-green-400">&gt;</span> Projects
-      </h1>
-      <p class="text-green-400/80 text-lg max-w-3xl">
-        A collection of cybersecurity projects, labs, and write-ups focusing on 
-        Blue Team operations, network security, and threat analysis.
-      </p>
+  <!-- Hero Section -->
+  <section class="min-h-[40vh] flex items-center justify-center mb-12">
+    <div class="text-center space-y-6">
+      <div class="text-left inline-block">
+        <p class="text-green-400/70 text-sm mb-2">$ cd ~/projects && ls -la</p>
+        <h1 class="text-4xl md:text-6xl font-bold">
+          <span class="text-cyan-400">Projects</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-green-400 mt-4">
+          Security Research & <span class="text-cyan-400">Lab Work</span>
+        </p>
+      </div>
+
+      <!-- Blinking Cursor Effect -->
+      <div class="text-green-400/70 animate-pulse text-2xl">_</div>
     </div>
   </section>
 
-  <!-- Project Count -->
-  <div class="mb-8">
-    <p class="text-green-400/70 text-sm">
-      <span class="text-cyan-400">→</span> Total Projects: <span class="text-cyan-400 font-bold">{projects.length}</span>
-    </p>
-  </div>
+  <!-- Project Stats Box -->
+  <section class="max-w-4xl mx-auto mb-12">
+    <div class="border border-cyan-500/30 bg-black/30 p-6 rounded-lg">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div>
+          <p class="text-3xl font-bold text-cyan-400">{projects.length}</p>
+          <p class="text-green-400/70 text-sm">Total Projects</p>
+        </div>
+        <div>
+          <p class="text-3xl font-bold text-cyan-400">5+</p>
+          <p class="text-green-400/70 text-sm">Technologies</p>
+        </div>
+        <div>
+          <p class="text-3xl font-bold text-cyan-400">Blue Team</p>
+          <p class="text-green-400/70 text-sm">Focus Area</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Description -->
+  <section class="max-w-4xl mx-auto mb-12">
+    <div class="border border-cyan-500/30 bg-black/30 p-8 rounded-lg">
+      <h2 class="text-2xl font-bold text-cyan-400 mb-6">
+        <span class="text-green-400">&gt;</span> cat README.md
+      </h2>
+      
+      <div class="space-y-4 text-green-400/90 leading-relaxed">
+        <p class="border-l-2 border-cyan-500/50 pl-4">
+          Below is a collection of my cybersecurity projects, penetration tests, and security research. 
+          Each project demonstrates practical skills in <span class="text-cyan-400 font-semibold">defensive security</span>, 
+          <span class="text-cyan-400 font-semibold">network analysis</span>, and 
+          <span class="text-cyan-400 font-semibold">threat detection</span>.
+        </p>
+        
+        <p class="border-l-2 border-cyan-500/50 pl-4">
+          These hands-on experiences showcase real-world applications of cybersecurity principles, 
+          from conducting network audits to analyzing malware behavior and implementing security controls.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <!-- Project Grid -->
-  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {projects.map((project) => (
-      <ProjectCard
-        title={project.title}
-        description={project.description}
-        tags={project.tags}
-        url={project.url}
-      />
-    ))}
+  <section class="max-w-7xl mx-auto mb-12">
+    <div class="mb-6">
+      <p class="text-green-400/70 text-sm">
+        <span class="text-cyan-400">→</span> Displaying {projects.length} projects
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project) => (
+        <ProjectCard
+          title={project.title}
+          description={project.description}
+          tags={project.tags}
+          url={project.url}
+        />
+      ))}
+    </div>
   </section>
 
   <!-- Terminal Footer -->
-  <div class="text-center py-12 text-green-400/50 text-sm">
-    <p>$ EOF</p>
+  <div class="text-center py-8 text-green-400/50 text-sm">
+    <p>$ exit</p>
   </div>
 </MainLayout>
+
+<style>
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+</style>
