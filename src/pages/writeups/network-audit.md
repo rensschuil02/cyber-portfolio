@@ -2,7 +2,7 @@
 title: 'Network Security Audit @ HvA Amsterdam'
 date: '2026-01-15'
 tags: ['Network Security', 'Penetration Testing', 'Security Audit']
-layout: '../../layouts/MainLayout.astro'
+layout: '../../layouts/MarkdownLayout.astro'
 ---
 
 # Network Security Audit @ HvA Amsterdam

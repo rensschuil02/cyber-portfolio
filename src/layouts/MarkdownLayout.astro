@@ -1,0 +1,118 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+const { frontmatter } = Astro.props;
+---
+
+<MainLayout title={frontmatter.title}>
+  <article class="max-w-4xl mx-auto prose prose-invert prose-cyan">
+    <div class="border border-cyan-500/30 bg-black/30 p-8 rounded-lg">
+      <div class="mb-6">
+        <p class="text-green-400/70 text-sm mb-2">
+          <span class="text-cyan-400">&gt;</span> cat {frontmatter.title.toLowerCase().replace(/\s+/g, '-')}.md
+        </p>
+        <h1 class="text-3xl md:text-4xl font-bold text-cyan-400 mb-2">
+          {frontmatter.title}
+        </h1>
+        <p class="text-green-400/70 text-sm">
+          Published: {frontmatter.date}
+        </p>
+      </div>
+      
+      <div class="text-green-400/90 leading-relaxed markdown-content">
+        <slot />
+      </div>
+    </div>
+  </article>
+</MainLayout>
+
+<style is:global>
+  .markdown-content h1,
+  .markdown-content h2,
+  .markdown-content h3 {
+    color: #22d3ee;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .markdown-content h2 {
+    font-size: 1.5rem;
+    border-bottom: 1px solid rgba(34, 211, 238, 0.3);
+    padding-bottom: 0.5rem;
+  }
+  
+  .markdown-content h3 {
+    font-size: 1.25rem;
+  }
+  
+  .markdown-content p {
+    margin-bottom: 1rem;
+  }
+  
+  .markdown-content ul,
+  .markdown-content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .markdown-content li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .markdown-content code {
+    background-color: rgba(34, 211, 238, 0.1);
+    color: #22d3ee;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .markdown-content pre {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+  
+  .markdown-content pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  .markdown-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+  
+  .markdown-content th,
+  .markdown-content td {
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    padding: 0.5rem;
+  }
+  
+  .markdown-content th {
+    background-color: rgba(34, 211, 238, 0.1);
+    color: #22d3ee;
+  }
+  
+  .markdown-content hr {
+    border: none;
+    border-top: 1px solid rgba(34, 211, 238, 0.3);
+    margin: 1.5rem 0;
+  }
+  
+  .markdown-content blockquote {
+    border-left: 2px solid rgba(34, 211, 238, 0.5);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: rgba(74, 222, 128, 0.8);
+  }
+  
+  .markdown-content strong {
+    color: #22d3ee;
+    font-weight: bold;
+  }
+</style>
