@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+import '../styles/global.css';
 
 interface Props {
   title?: string;
@@ -69,20 +70,3 @@ const { title = 'Portfolio | Cybersecurity Student' } = Astro.props;
     </footer>
   </body>
 </html>
-
-<style is:global>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    font-family: 'Courier New', Courier, monospace;
-  }
-
-  ::selection {
-    background-color: rgba(6, 182, 212, 0.3);
-    color: #22d3ee;
-  }
-</style>
