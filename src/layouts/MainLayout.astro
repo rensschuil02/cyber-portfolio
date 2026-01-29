@@ -7,47 +7,92 @@ interface Props {
 }
 
 const { title = 'Portfolio | Cybersecurity Student' } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL || '/';
 ---
 
 <!DOCTYPE html>
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body class="bg-black text-green-400 font-mono min-h-screen flex flex-col">
+  <body class="bg-black text-green-400 font-mono min-h-screen flex flex-col overflow-x-hidden">
     <!-- Navigation Bar -->
     <header class="border-b border-cyan-500/30 bg-black/50 backdrop-blur-sm sticky top-0 z-50">
       <nav class="container mx-auto px-4 py-4">
         <div class="flex items-center justify-between">
-          <a href="/" class="text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+          <a href={baseUrl} class="text-lg sm:text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors shrink-0">
             <span class="text-green-400">&gt;</span> portfolio.sh
           </a>
-          <ul class="flex gap-6">
+          
+          <!-- Desktop Navigation -->
+          <ul class="hidden lg:flex gap-4 xl:gap-6">
             <li>
               <a 
-                href="/cyber-portfolio/" 
-                class="hover:text-cyan-400 transition-colors border-b-2 border-transparent hover:border-cyan-400"
+                href={baseUrl} 
+                class="hover:text-cyan-400 transition-colors border-b-2 border-transparent hover:border-cyan-400 whitespace-nowrap"
               >
                 [Home]
               </a>
             </li>
             <li>
               <a 
-                href="/cyber-portfolio/projects" 
-                class="hover:text-cyan-400 transition-colors border-b-2 border-transparent hover:border-cyan-400"
+                href={`${baseUrl}projects`}
+                class="hover:text-cyan-400 transition-colors border-b-2 border-transparent hover:border-cyan-400 whitespace-nowrap"
               >
                 [Projects]
               </a>
             </li>
             <li>
               <a 
-                href="/cyber-portfolio/contact" 
-                class="hover:text-cyan-400 transition-colors border-b-2 border-transparent hover:border-cyan-400"
+                href={`${baseUrl}contact`}
+                class="hover:text-cyan-400 transition-colors border-b-2 border-transparent hover:border-cyan-400 whitespace-nowrap"
               >
                 [Contact]
+              </a>
+            </li>
+          </ul>
+
+          <!-- Mobile Hamburger Menu -->
+          <button 
+            id="mobile-menu-button" 
+            class="lg:hidden text-cyan-400 hover:text-cyan-300 transition-colors focus:outline-none p-2"
+            aria-label="Toggle menu"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-2">
+          <ul class="flex flex-col gap-3">
+            <li>
+              <a 
+                href={baseUrl}
+                class="block py-2 px-4 hover:bg-cyan-500/10 rounded border border-cyan-500/30 hover:border-cyan-400 transition-all"
+              >
+                <span class="text-cyan-400">&gt;</span> Home
+              </a>
+            </li>
+            <li>
+              <a 
+                href={`${baseUrl}projects`}
+                class="block py-2 px-4 hover:bg-cyan-500/10 rounded border border-cyan-500/30 hover:border-cyan-400 transition-all"
+              >
+                <span class="text-cyan-400">&gt;</span> Projects
+              </a>
+            </li>
+            <li>
+              <a 
+                href={`${baseUrl}contact`}
+                class="block py-2 px-4 hover:bg-cyan-500/10 rounded border border-cyan-500/30 hover:border-cyan-400 transition-all"
+              >
+                <span class="text-cyan-400">&gt;</span> Contact
               </a>
             </li>
           </ul>
@@ -57,7 +102,7 @@ const { title = 'Portfolio | Cybersecurity Student' } = Astro.props;
 
     <!-- Main Content with Fade Transition -->
     <main 
-      class="flex-grow container mx-auto px-4 py-8"
+      class="flex-grow container mx-auto px-4 py-8 max-w-full"
       transition:animate="fade"
     >
       <slot />
