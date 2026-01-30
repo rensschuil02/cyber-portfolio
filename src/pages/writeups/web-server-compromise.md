@@ -69,6 +69,7 @@ webuser:x:1001:1001:,,,:/home/webuser:/bin/bash
 ```
 
 **Traffic Analysis:** Monitoring showed successful command injection payloads reaching the server. The execution context was a low-privileged web process user, providing an immediate foothold into the webroot and configuration files.
+
 ---
 
 ### 2. SQL Injection (Union-Based)
@@ -100,6 +101,7 @@ uid=0(root) gid=0(root) groups=0(root)
 ```
 
 **Traffic Analysis:** Post-exploitation activity confirmed the transition from webuser to root using the find binary. This provided full persistence on the host and the ability to pivot further into the internal network.
+
 ---
 
 ## Remediation Plan
