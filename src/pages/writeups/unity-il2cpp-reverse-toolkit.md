@@ -56,7 +56,7 @@ GameObject("OdinMenuObject") ──► AddComponent<MenuComponent>()
      ↓ (Unity lifecycle)
 MenuComponent.Awake() → Start() → Update() → OnGUI()
 ```
-BepInEx Architecture:
+**BepInEx Architecture:**
 
 **Plugin Loader:** Hooks Unity's AppDomain.Load() before main game loop
 **IL2CPP Bridge:** Translates C# types to native Unity IL2CPP runtime objects
