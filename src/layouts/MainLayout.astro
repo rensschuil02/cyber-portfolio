@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
 
 interface Props {
@@ -7,9 +6,7 @@ interface Props {
 }
 
 const { title = 'Portfolio | Cybersecurity Student' } = Astro.props;
-const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
-  ? import.meta.env.BASE_URL 
-  : import.meta.env.BASE_URL + '/';
+const baseUrl = '/cyber-portfolio/';
 ---
 
 <!DOCTYPE html>
@@ -18,7 +15,6 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/')
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <title>{title}</title>
-    <ViewTransitions />
   </head>
   <body class="bg-black text-green-400 font-mono min-h-screen flex flex-col overflow-x-hidden">
     <!-- Navigation Bar -->
@@ -105,7 +101,6 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/')
     <!-- Main Content with Fade Transition -->
     <main 
       class="flex-grow container mx-auto px-4 py-8 max-w-full"
-      transition:animate="fade"
     >
       <slot />
     </main>
