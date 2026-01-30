@@ -1,6 +1,6 @@
 ---
 title: 'Full System Compromise: Technova Solutions Legacy Web Infrastructure'
-date: '2025-11-21'
+date: '30-01-2026'
 tags: ['Web Security', 'Privilege Escalation', 'SQL Injection', 'RCE']
 layout: '../../layouts/MarkdownLayout.astro'
 ---

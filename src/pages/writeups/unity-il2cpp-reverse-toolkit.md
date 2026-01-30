@@ -1,6 +1,6 @@
 ---
 title: 'Unity IL2CPP Game Overlay & Modding Project'
-date: '2026-01-25'
+date: '30-01-2026'
 tags: ['Game Modding', 'C#', 'C++', 'Unity', 'Reverse Engineering']
 layout: '../../layouts/MarkdownLayout.astro'
 ---
@@ -44,7 +44,7 @@ The project followed a structured, research-oriented workflow:
 
 ## Tools Used
 
-BepInEx 6 IL2CPP Injection Flow
+**BepInEx 6 IL2CPP Injection Flow**
 ```
 Unity Game Process
      ↓

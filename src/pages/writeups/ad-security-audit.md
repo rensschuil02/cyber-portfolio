@@ -1,6 +1,6 @@
 ---
 title: 'Active Directory Security Audit: NTLM & Name Resolution Vulnerabilities'
-date: '2025-10-15'
+date: '29-01-2026'
 tags: ['Active Directory', 'NTLM Relay', 'Penetration Testing', 'Network Security']
 layout: '../../layouts/MarkdownLayout.astro'
 ---
