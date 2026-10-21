@@ -1,0 +1,85 @@
+---
+/**
+ * Master layout — the terminal shell for every page and write-up.
+ *
+ * Responsibilities:
+ *  - Self-hosted variable monospace font (no CDN, zero third-party origins)
+ *  - SEO + social meta (canonical, Open Graph, Twitter card, theme-color)
+ *  - Astro View Transitions via <ClientRouter /> (crossfade per route)
+ *  - Extracted NavBar / Footer with `transition:persist` to stop header re-flicker
+ *
+ * @example
+ * <Layout title="Projects | Cybersecurity Portfolio" description="...">
+ *   <h1>...</h1>
+ * </Layout>
+ */
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import NavBar from '../components/nav/NavBar.astro';
+import Footer from '../components/ui/Footer.astro';
+
+interface Props {
+  /** Exact <title> text, e.g. "Projects | Cybersecurity Portfolio" */
+  title?: string;
+  /** Meta description; ~150 chars keeps Google from truncating */
+  description?: string;
+  /** Optional social preview image, resolved against Astro.site */
+  ogImage?: string;
+}
+
+const {
+  title = 'portfolio.sh — Rens Schuil | Cybersecurity @ HvA Amsterdam',
+  description =
+    'Penetration testing, reverse engineering and defensive security write-ups from Rens Schuil, cybersecurity student at Hogeschool van Amsterdam.',
+  ogImage,
+} = Astro.props;
+
+// Sanitized base path ('/cyber-portfolio/'), works whether BASE_URL ships with a trailing slash or not
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+
+// Canonical always includes the base path in static builds, e.g. /cyber-portfolio/projects
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = ogImage ? new URL(ogImage, Astro.site) : undefined;
+---
+
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Social -->
+    <meta property="og:type" content={ogImage ? 'article' : 'website'} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImageURL && <meta property="og:image" content={ogImageURL} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Chrome/Edge mobile toolbar color -->
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" type="image/svg+xml" href={`${base}cmd-terminal-icon.svg`} />
+
+    <ClientRouter />
+  </head>
+
+  <body class="bg-black text-term-green font-mono min-h-screen flex flex-col overflow-x-hidden">
+    <NavBar transition:persist="site-header" />
+
+    <main
+      class="flex-grow container mx-auto px-4 py-8 max-w-full"
+      transition:animate="fade"
+    >
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

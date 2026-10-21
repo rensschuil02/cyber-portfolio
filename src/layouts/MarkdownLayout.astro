@@ -1,9 +1,9 @@
 ---
-import MainLayout from './MainLayout.astro';
+import Layout from './Layout.astro';
 const { frontmatter } = Astro.props;
 ---
 
-<MainLayout title={frontmatter.title}>
+<Layout title={`${frontmatter.title} | Cybersecurity Portfolio`}>
   <article class="max-w-4xl mx-auto prose prose-invert prose-cyan">
     <div class="border border-cyan-500/30 bg-black/30 p-8 rounded-lg">
       <div class="mb-6">
@@ -23,7 +23,7 @@ const { frontmatter } = Astro.props;
       </div>
     </div>
   </article>
-</MainLayout>
+</Layout>
 
 <style is:global>
   .markdown-content h1,

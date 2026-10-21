@@ -1,0 +1,151 @@
+---
+/**
+ * Sticky terminal navigation — single source for desktop + mobile link lists.
+ *
+ *  - Marks the active route with `aria-current` + a cyan underline
+ *  - `transition:persist` from the parent keeps this header across page swaps
+ *    (the inline script re-binds itself on `astro:after-swap` regardless, defensive)
+ */
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+
+const links: NavLink[] = [
+  { href: base, label: 'Home' },
+  { href: `${base}projects/`, label: 'Projects' },
+  { href: `${base}contact/`, label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === base
+    ? currentPath === base || currentPath === base.slice(0, -1)
+    : currentPath.startsWith(href);
+---
+
+<header class="border-b border-cyan-500/30 bg-black/50 backdrop-blur-sm sticky top-0 z-50">
+  <nav class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <a
+        href={base}
+        class="text-lg sm:text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors shrink-0"
+      >
+        <span class="text-term-green">&gt;</span> portfolio.sh
+      </a>
+
+      <!-- Desktop -->
+      <ul class="hidden lg:flex gap-4 xl:gap-6">
+        {
+          links.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <li>
+                <a
+                  href={link.href}
+                  aria-current={active ? 'page' : undefined}
+                  class="hover:text-cyan-400 transition-colors border-b-2 whitespace-nowrap py-1 ${
+                    active ? 'border-cyan-400 text-cyan-300' : 'border-transparent hover:border-cyan-400'
+                  }"
+                >
+                  [{link.label}]
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="mobile-menu-button"
+        class="lg:hidden text-cyan-400 hover:text-cyan-300 transition-colors focus:outline-none p-2"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-2">
+      <ul class="flex flex-col gap-3">
+        {
+          links.map((link) => {
+            const active = isActive(link.href);
+            return (
+              <li>
+                <a
+                  href={link.href}
+                  aria-current={active ? 'page' : undefined}
+                  class={`block py-2 px-4 rounded border transition-all ${
+                    active
+                      ? 'border-cyan-400 bg-cyan-500/10 text-cyan-300'
+                      : 'border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-500/10'
+                  }`}
+                >
+                  <span class="text-cyan-400">&gt;</span> {link.label}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  (function () {
+    function initMenu() {
+      const menuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIcon = document.getElementById('menu-icon');
+      const closeIcon = document.getElementById('close-icon');
+
+      if (!menuButton || !mobileMenu || !menuIcon || !closeIcon) return;
+
+      // Clone to drop stale listeners after client-side swaps
+      const freshButton = menuButton.cloneNode(true);
+      if (menuButton.parentNode) {
+        menuButton.parentNode.replaceChild(freshButton, menuButton);
+      }
+
+      freshButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        menuIcon.classList.toggle('hidden', !isHidden);
+        closeIcon.classList.toggle('hidden', isHidden);
+
+        freshButton.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          mobileMenu.classList.add('hidden');
+          menuIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+          freshButton.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMenu);
+    } else {
+      initMenu();
+    }
+
+    // Re-bind after Astro View Transition swaps
+    document.addEventListener('astro:after-swap', initMenu);
+  })();
+</script>

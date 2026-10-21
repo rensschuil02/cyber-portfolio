@@ -1,8 +1,11 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<MainLayout title="Contact | Cybersecurity Portfolio">
+<Layout
+  title="Contact | Cybersecurity Portfolio"
+  description="Get in touch with Rens Schuil — cybersecurity student at HvA Amsterdam. Email, GitHub, LinkedIn and Discord."
+>
   <!-- Hero Section -->
   <section class="min-h-[40vh] flex items-center justify-center mb-12">
     <div class="text-center space-y-6">
@@ -176,7 +179,7 @@ import MainLayout from '../layouts/MainLayout.astro';
   <div class="text-center py-8 text-green-400/50 text-sm">
     <p>$ echo "Looking forward to hearing from you!"</p>
   </div>
-</MainLayout>
+</Layout>
 
 <style>
   @keyframes blink {
