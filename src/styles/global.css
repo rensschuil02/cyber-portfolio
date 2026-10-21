@@ -1,6 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+/*
+ * Terminal / Cyber UI theme — Tailwind 4 CSS-first tokens.
+ * Mirrors the site's established palette (black bg, green body text,
+ * cyan interactive accents) while adding amber as a warning/highlight.
+ * Any utility below becomes available as e.g. `text-term-cyan`, `border-term-green/40`.
+ */
+@theme {
+  /* Monospace font stack (self-hosted fonts land in public/fonts/, step 4) */
+  --font-mono:
+    'JetBrains Mono', 'Fira Code', ui-monospace, 'Cascadia Code', Menlo,
+    Consolas, 'Courier New', monospace;
+
+  /* Terminal palette */
+  --color-term-green: #4ade80; /* body text, prompts          (was text-green-400) */
+  --color-term-cyan: #22d3ee; /* interactive/heading accent  (was text-cyan-400)   */
+  --color-term-amber: #fbbf24; /* warnings, EXP badges        */
+  --color-term-red: #f87171; /* exploits, red-team findings (was text-red-400)    */
+  --color-term-dim: #6b7280; /* muted hints                 */
+}
+
+:root {
+  color-scheme: dark;
+}
 
 * {
   box-sizing: border-box;
@@ -9,7 +31,7 @@
 }
 
 body {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: var(--font-mono);
 }
 
 ::selection {
