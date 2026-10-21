@@ -1,8 +1,15 @@
 ---
 title: 'Unity IL2CPP Game Overlay & Modding Project'
-date: '30-01-2026'
+description: >-
+  Educational reverse-engineering toolkit for a Unity IL2CPP game — BepInEx
+  runtime injection, custom overlay UI and engine introspection in a local lab
+  environment.
+pubDate: 2026-01-30
+category: 'malware'
+tools: ['bepinex']
+difficulty: 'intermediate'
+featured: false
 tags: ['Game Modding', 'C#', 'C++', 'Unity', 'Reverse Engineering']
-layout: '../../layouts/MarkdownLayout.astro'
 ---
 
 > **EDUCATIONAL USE ONLY** — Local research project analyzing Unity IL2CPP internals. 

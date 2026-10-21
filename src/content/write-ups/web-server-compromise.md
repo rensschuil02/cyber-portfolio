@@ -1,8 +1,15 @@
 ---
 title: 'Full System Compromise: Technova Solutions Legacy Web Infrastructure'
-date: '30-01-2026'
+description: >-
+  A complete system takeover of the Technova Solutions legacy web
+  infrastructure — SQL injection to RCE, then root access — following the
+  PTES methodology.
+pubDate: 2026-01-30
+category: 'web-security'
+tools: ['nmap', 'gobuster', 'sqlmap']
+difficulty: 'advanced'
+featured: true
 tags: ['Web Security', 'Privilege Escalation', 'SQL Injection', 'RCE']
-layout: '../../layouts/MarkdownLayout.astro'
 ---
 
 # Full System Compromise: Technova Solutions Legacy Web Infrastructure @ HvA Amsterdam

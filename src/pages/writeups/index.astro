@@ -1,0 +1,79 @@
+---
+/**
+ * Write-up index: all entries grouped by taxonomy category, newest first.
+ */
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { CATEGORIES } from '../../lib/taxonomy';
+import { formatDate } from '../../lib/utils';
+
+const entries = await getCollection('write-ups');
+const sorted = entries.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const groups = CATEGORIES.map((category) => ({
+  category,
+  items: sorted.filter((entry) => entry.data.category === category.id),
+})).filter((group) => group.items.length > 0);
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+---
+
+<Layout
+  title="Write-ups | Cybersecurity Portfolio"
+  description="Security write-ups: penetration tests, AD audits, web exploitation and reverse engineering from Rens Schuil at HvA Amsterdam."
+>
+  <!-- Hero -->
+  <section class="min-h-[30vh] flex items-center justify-center mb-12">
+    <div class="text-center space-y-6">
+      <div class="text-left inline-block">
+        <p class="text-term-green/70 text-sm mb-2">$ ls ~/writeups --group=category</p>
+        <h1 class="text-4xl md:text-6xl font-bold">
+          <span class="text-cyan-400">Write-ups</span>
+        </h1>
+      </div>
+      <div class="text-term-green/70 animate-pulse text-2xl">_</div>
+    </div>
+  </section>
+
+  <!-- Category groups -->
+  <section class="max-w-4xl mx-auto mb-12 space-y-10">
+    {
+      groups.map(({ category, items }) => (
+        <div>
+          <div class="flex flex-wrap items-baseline gap-4 mb-4">
+            <h2 class="text-xl font-bold text-cyan-400">
+              <span class="text-term-green">&gt;</span> {category.label}
+            </h2>
+            <a
+              href={`${base}writeups/${category.id}/`}
+              class={`px-2 py-0.5 rounded border text-xs ${category.chipClass}`}
+            >
+              {items.length} report{items.length === 1 ? '' : 's'} →
+            </a>
+          </div>
+
+          <div class="space-y-4">
+            {items.map((entry: CollectionEntry<'write-ups'>) => (
+              <a
+                href={`${base}writeups/${entry.id}/`}
+                class="block border border-cyan-500/30 hover:border-cyan-400 bg-black/30 hover:bg-cyan-500/5 p-5 rounded-lg transition-all"
+              >
+                <div class="flex flex-col sm:flex-row justify-between gap-3">
+                  <div>
+                    <h3 class="text-term-green font-bold mb-1">{entry.data.title}</h3>
+                    <p class="text-term-green/70 text-sm">{entry.data.description}</p>
+                  </div>
+                  <span class="text-term-dim text-sm shrink-0 whitespace-nowrap">
+                    {formatDate(entry.data.pubDate)}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </section>
+</Layout>

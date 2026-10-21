@@ -1,8 +1,15 @@
 ---
 title: 'Active Directory Security Audit: NTLM & Name Resolution Vulnerabilities'
-date: '29-01-2026'
+description: >-
+  Internal AD environment audit showing LLMNR/mDNS poisoning, MITM6 DNS
+  takeover and NTLM relay attacks leading to full credential compromise on
+  Windows Server 2019.
+pubDate: 2026-01-29
+category: 'assessment'
+tools: ['responder', 'mitm6', 'ntlmrelayx', 'hashcat']
+difficulty: 'advanced'
+featured: true
 tags: ['Active Directory', 'NTLM Relay', 'Penetration Testing', 'Network Security']
-layout: '../../layouts/MarkdownLayout.astro'
 ---
 
 # Active Directory Security Audit: NTLM & Name Resolution Vulnerabilities @ HvA Amsterdam
