@@ -6,7 +6,7 @@
  * the Zod schema type-checks frontmatter at build time, so a typo'd date or
  * unknown tool id fails CI instead of silently shipping.
  */
-import { defineCollection } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 import { CATEGORY_IDS, DIFFICULTIES, TOOL_IDS } from './lib/taxonomy';
@@ -36,6 +36,20 @@ const writeUps = defineCollection({
   }),
 });
 
+const projects = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().min(1),
+    pubDate: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+    /** Link the project to its full write-up (validated against 'write-ups') */
+    writeUp: reference('write-ups').optional(),
+    featured: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   'write-ups': writeUps,
+  projects,
 };

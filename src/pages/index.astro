@@ -1,5 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../lib/taxonomy';
+
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+
+const featured = (await getCollection('write-ups'))
+  .filter((entry) => entry.data.featured)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <Layout
@@ -76,9 +85,67 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
+  <!-- Competency Categories — driven by src/lib/taxonomy.ts -->
+  <section class="max-w-6xl mx-auto py-12">
+    <h2 class="text-2xl font-bold text-cyan-400 mb-8 text-center">
+      <span class="text-term-green">&gt;</span> ls ~/competencies
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {
+        CATEGORIES.map((category) => (
+          <a
+            href={`${base}writeups/${category.id}/`}
+            class="group border border-cyan-500/30 hover:border-cyan-400 bg-black/30 hover:bg-cyan-500/5 p-6 rounded-lg transition-all"
+          >
+            <h3 class="text-lg font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors mb-2">
+              {category.label}
+            </h3>
+            <p class="text-term-green/70 text-sm mb-4">{category.description}</p>
+            <p class="text-term-amber/80 text-xs group-hover:text-term-amber transition-colors">
+              $ {category.command}
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Featured Write-ups -->
+  <section class="max-w-4xl mx-auto py-12">
+    <div class="flex items-baseline justify-between mb-6">
+      <h2 class="text-2xl font-bold text-cyan-400">
+        <span class="text-term-green">&gt;</span> head -n 3 featured.log
+      </h2>
+      <a href={`${base}writeups/`} class="text-sm text-cyan-400 hover:text-cyan-300 transition-colors whitespace-nowrap">
+        [All write-ups]
+      </a>
+    </div>
+
+    <div class="space-y-4">
+      {
+        featured.map((entry) => (
+          <a
+            href={`${base}writeups/${entry.id}/`}
+            class="block border border-cyan-500/30 hover:border-cyan-400 bg-black/30 hover:bg-cyan-500/5 p-5 rounded-lg transition-all"
+          >
+            <div class="flex flex-col sm:flex-row justify-between gap-3">
+              <div>
+                <h3 class="text-term-green font-bold mb-1">{entry.data.title}</h3>
+                <p class="text-term-green/70 text-sm">{entry.data.description}</p>
+              </div>
+              <span class="text-term-dim text-sm shrink-0 whitespace-nowrap">
+                {entry.data.tools.length > 0 ? entry.data.tools.join(' · ') : 'lab report'}
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
   <!-- Terminal Command Decoration -->
   <div class="text-center py-8 text-green-400/50 text-sm">
-    <p>$ ls -la /home/projects</p>
+    <p>$ ls -la ~/writeups --structured</p>
   </div>
 </Layout>
 

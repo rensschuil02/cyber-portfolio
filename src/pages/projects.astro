@@ -1,28 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection, getEntry } from 'astro:content';
 
-// Project Data
-const projects = [
-  {
-    title: 'Unity IL2CPP Reverse Engineering Toolkit',
-    description: 'Client-side reverse engineering toolkit for Unity IL2CPP games. Developed runtime injection via BepInEx framework, custom OnGUI overlay with tabbed interface, game state introspection, movement/physics manipulation, and role visualization capabilities to analyze internal data structures and engine behavior.',
-    tags: ['Reverse Engineering', 'IL2CPP', 'Runtime Injection', 'Game Security', 'BepInEx'],
-    url: '/cyber-portfolio/writeups/unity-il2cpp-reverse-toolkit'
-    },
-  {
-    title: 'Technova: Web Infrastructure Hijack & Root Escalation',
-    description: 'An end-to-end penetration test resulting in root-level access within 5 minutes. Exploited SQL injection and RCE to gain initial access, followed by privilege escalation via sudo misconfigurations.',
-    tags: ['Web Security', 'SQL Injection', 'Remote Code Execution', 'Privilege Escalation'],
-    url: '/cyber-portfolio/writeups/web-server-compromise'
-  },
-  {
-    title: 'Active Directory Attack Surface & Exploitation Flow',
-    description: 'A comprehensive security audit of an AD environment identifying critical flaws in NTLM authentication and IPv6 DNS takeover, demonstrating full credential compromise via LLMNR poisoning and MITM6 relay attacks.',
-    tags: ['Active Directory', 'NTLM Relay', 'MITM6', 'Identity Security'],
-    url: '/cyber-portfolio/writeups/ad-security-audit'
-}
-];
+// Projects collection -> grid rows; each project resolves its write-up link
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+
+const projectsRaw = await getCollection('projects');
+const sorted = projectsRaw.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const projects = await Promise.all(
+  sorted.map(async (project) => {
+    const writeUp = project.data.writeUp ? await getEntry(project.data.writeUp) : undefined;
+    if (!writeUp) {
+      throw new Error(
+        `Project "${project.data.title}" must reference an existing write-up in its frontmatter (writeUp: <slug>)`
+      );
+    }
+    return {
+      title: project.data.title,
+      description: project.data.description,
+      tags: project.data.tags,
+      url: `${base}writeups/${writeUp.id}/`,
+    };
+  })
+);
 ---
 
 <Layout
